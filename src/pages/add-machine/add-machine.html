@@ -1,0 +1,98 @@
+<!--
+  Generated template for the AddMachine page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title><span *ngIf="!id">Add Machine</span><span *ngIf="id">Update Machine</span></ion-title>
+    <ion-buttons end>
+      <button ion-button icon-left (click)="submitIt($event)" round color="primary" [disabled]="isLoading">
+        <ion-icon name="send"></ion-icon>
+        {{(isLoading) ? "Please wait..." : (!id) ? "Submit" : "Update"}}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngIf="client.id">
+      <ion-thumbnail item-left>
+        <img [src]="clientPhoto" (click)="viewPhoto(clientPhotoRaw)">
+      </ion-thumbnail>
+      <h2>{{ client.name }}</h2>
+      <p>{{ client.units }} {{ (client.units > 1) ? "machines" : "machine" }} owned</p>
+      <button ion-button clear item-right (click)="presentModal()">Change</button>
+    </ion-item>
+    <ion-item *ngIf="client.id == ''">
+      <button ion-button full icon-left (click)="presentModal()" color="light" large><ion-icon name="person"></ion-icon><span >Select Client</span></button>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="pin" item-left></ion-icon>
+      <h2>{{ address }}</h2>
+      <h3 style="color: red" *ngIf="!isYourArea">Not your Area of Coverage</h3>
+      <button ion-button clear item-right (click)="updateMarker()">update</button>
+    </ion-item>
+    <ion-item>
+      <h2 *ngIf="photo != ''">Machine Photo</h2>
+      <img [src]="photo" *ngIf="photo != ''" class="thePhoto" (click)="viewPhoto(photoRaw)" />
+      <button ion-button full icon-left (click)="capture()" color="light" large><ion-icon name="camera"></ion-icon><span *ngIf="photo == ''">Take a Machine Photo</span><span *ngIf="photo != ''">Change Machine Photo</span></button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Delivery Schedule</ion-label>
+      <ion-select [(ngModel)]="delivery">
+        <ion-option *ngFor="let day of days" [value]="day.minify">{{ day.title }}</ion-option>
+        <ion-option value="Unspecified">Unspecified</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Establishment Type</ion-label>
+      <ion-select [(ngModel)]="establishmentType">
+        <ion-option value="Convenience Store">Convenience Store</ion-option>
+        <ion-option value="Sari-sari Store">Sari-sari Store</ion-option>
+        <ion-option value="Clinic">Clinic</ion-option>
+        <ion-option value="Hospital">Hospital</ion-option>
+        <ion-option value="Canteen">Canteen</ion-option>
+        <ion-option value="School">School</ion-option>
+        <ion-option value="Office">Office</ion-option>
+        <ion-option value="Standalone">Standalone</ion-option>
+        <ion-option value="House">House</ion-option>
+        <ion-option value="Factory">Factory</ion-option>
+        <ion-option value="Construction Site">Construction Site</ion-option>
+        <ion-option value="BPO">BPO</ion-option>
+        <ion-option value="Hotel">Hotel</ion-option>
+        <ion-option value="Restaurant">Restaurant</ion-option>
+        <ion-option value="Funeral Homes">Funeral Homes</ion-option>
+        <ion-option value="Bakery">Bakery</ion-option>
+        <ion-option value="Warehouse">Warehouse</ion-option>
+        <ion-option value="Terminal">Terminal</ion-option>
+        <ion-option value="Car Wash">Car Wash</ion-option>
+        <ion-option value="Police Station">Police Station</ion-option>
+        <ion-option value="Water Refilling Station">Water Refilling Station</ion-option>
+        <ion-option value="Salon / Barber Shop">Salon / Barber Shop</ion-option>
+        <ion-option value="Pharmacy">Pharmacy</ion-option>
+        <ion-option value="Market">Market</ion-option>
+        <ion-option value="Others">Others</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-list radio-group [(ngModel)]="machineType">
+    <ion-list-header>
+      Machine Type
+    </ion-list-header>
+    <ion-item *ngFor="let machine of machines">
+      <ion-label>{{ machine }}</ion-label>
+      <ion-thumbnail item-left>
+        <img width="80" height="80" src="assets/images/machines/{{ machine }}.png" />
+      </ion-thumbnail>
+      <ion-radio value="{{ machine }}"></ion-radio>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

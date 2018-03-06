@@ -1,0 +1,67 @@
+
+<ion-slides [pager]="true" (ionSlideDidChange)="checkDrag($event)" id="slides" (ionSlideDrag)="checkr()">
+  <ion-slide id="start">
+    <div class="page-header">
+      <h1>Barista Choi <small>version {{ myDatabase.appVersion }}</small></h1>
+    </div>
+    <p>Let's set some basic configuration before we start! slide right to continue</p>
+
+  </ion-slide>
+  <ion-slide *ngIf="!myDatabase.passcode" id="passcode">
+    <div class="page-header">
+      <h1>Admin Pass Code</h1>
+    </div>
+    <p>Set your <strong><em>Admin Pass Code</em></strong> for this device</p>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Pass Code</ion-label>
+        <ion-input type="text" [(ngModel)]="passcode"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Re-Type Pass Code</ion-label>
+        <ion-input type="text" [(ngModel)]="rpasscode"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="warningPasscode != ''">
+        <p class="bg-danger" style="padding: 0.5em">{{ warningPasscode}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-slide>
+  <ion-slide id="register" *ngIf="!myDatabase.usersNum">
+    <ion-list>
+      <ion-item>
+        <div class="container-fluid">
+          <img class="img-responsive img-thumbnail center-block" [src]="(photo == '') ? 'assets/images/no-profile-img.gif' : photo" (click)="viewPhoto(photoRaw)" style="width: 20vh;height: 20vh">
+          <div class="row">
+            <div class="col text-center">
+              <button ion-button round icon-left (click)="capture()" type="button" color="light"><ion-icon name="camera"></ion-icon><span *ngIf="photo == ''">Take a Photo</span><span *ngIf="photo != ''">Change Photo</span></button>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item *ngIf="warningPhoto != ''">
+        <p class="bg-danger" style="padding: 0.5em">{{ warningPhoto}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-label>Username</ion-label>
+        <ion-input type="text" [(ngModel)]="name" (input)="nameIt()" placeholder="Guest"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="warningName != ''">
+        <p class="bg-danger" style="padding: 0.5em">{{ warningName}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-label>Contact #</ion-label>
+        <ion-input type="number" [(ngModel)]="contact" placeholder="09255032353"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="warningContact != ''">
+        <p class="bg-danger" style="padding: 0.5em">{{ warningContact}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-slide>
+
+  <ion-slide class="final-slide" id="final">
+    <p class="bg-success" style="padding: 0.5em">Congrats!</p>
+    <button ion-button full (click)="startIt()">click to start!</button>
+  </ion-slide>
+
+
+</ion-slides>

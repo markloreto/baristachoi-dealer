@@ -1,0 +1,40 @@
+<!--
+  Generated template for the SearchClient page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Select Client</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-searchbar (ionInput)="getItems($event)" animated="true"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item *ngIf="searchQ.length == 0">
+    <p class="bg-info" style="padding: 0.5em">No clients found</p>
+  </ion-item>
+  <ion-list [virtualScroll]="searchQ" approxItemHeight="50px">
+    <ion-item *virtualItem="let client">
+      <ion-thumbnail item-left>
+        <img [src]="resolvePhoto(client.photo)" (click)="viewPhoto(client.photo)">
+      </ion-thumbnail>
+      <h2>{{ client.name }}</h2>
+      <div>
+          <span class="c-badge c-badge--{{ client.client_status_icon[0] }}"><ion-icon [name]="client.client_status_icon[1]"></ion-icon></span>
+          <span class="c-badge c-badge--info">{{ client.units }} {{ (client.units > 1) ? "machines" : "machine" }}</span>
+        </div>
+      <button ion-button clear item-right (click)="selectIt(client.id)">Select</button>
+    </ion-item>
+  </ion-list>
+  <ion-fab bottom right>
+    <button ion-fab (click)="addClient($event)"><ion-icon name="person-add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

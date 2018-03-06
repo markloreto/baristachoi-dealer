@@ -1,0 +1,18 @@
+<!--
+  Generated template for the GoogleMap component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+<ion-toolbar *ngIf="toolbar">
+    <ion-buttons>
+        <button ion-button icon-left clear [color]="accColor">
+            <ion-icon name="locate"></ion-icon>
+            <span *ngIf="accuracy == 'Positioning...'">{{ accuracy }}</span><span *ngIf="accuracy != 'Positioning...'">{{ accuracy }} meters</span>
+        </button>
+    </ion-buttons>
+</ion-toolbar>
+<div class="map-wrapper">
+    <div #map id="map" data-tap-disabled="true"></div>
+</div>
+

@@ -1,0 +1,41 @@
+page-callsheet-day {
+  .map-wrapper {
+    position: relative;
+    height: calc(100vh - 170px);
+  }
+
+  .sortNow{
+    border: 2px #6495ED solid;
+    box-shadow: -10px -10px #F8F8FF;
+    transform: translate(10px, 10px);
+    transition: box-shadow 0.2s, transform 0.2s;
+    z-index: 999;
+  }
+
+  .sortStop{
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .sortable-drag{
+    z-index: 9999;
+  }
+
+  .sortable-chosen{
+    z-index: 9999;
+    box-shadow: none;
+    transform: translate(0px, 0px);
+    border: 2px #6495ED solid;
+    transition: box-shadow 0.2s, transform 0.2s;
+
+  }
+
+  .sortable-ghost{
+    box-shadow: none;
+    transform: translate(0px, 0px);
+    border: 2px dashed grey;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .greenyellow {background-color: greenyellow;}
+  .def {background-color: white}
+
+}

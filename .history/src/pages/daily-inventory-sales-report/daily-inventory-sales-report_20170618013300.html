@@ -1,0 +1,45 @@
+<!--
+  Generated template for the DailyInventorySalesReport page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Daily Inventory and Sales Report</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-buttons left >
+      <button ion-button small icon-left (click)="pMonth()" round color="dark">
+        <ion-icon name="arrow-back"></ion-icon>
+        {{ previousMonth }}
+      </button>
+    </ion-buttons>
+    <ion-buttons *ngIf="hideNext" left>
+      <button small ion-button (click)="nMonth()" round icon-right color="dark">
+        {{ nextMonth }}
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title right><small>{{ headerMonth }}</small></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="well well-lg text-center" *ngIf="disr.length == 0">No Data</div>
+  <ion-list>
+    <div *ngFor="let d of disr" class="well well-sm">
+      <button ion-item (click)="disrItem(d)" [color]="(d.status == 'active') ? 'yellow' : 'green'">
+        <h2>{{d.date}}</h2>
+      </button>
+      <div class="well well-sm text-center" >Sequence # {{d.sequence_id}}</div>
+    </div>
+  </ion-list>
+  <ion-fab bottom right *ngIf="!disrCount">
+    <button ion-fab (click)="add()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

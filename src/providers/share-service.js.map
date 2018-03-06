@@ -1,0 +1,1 @@
+{"version":3,"file":"share-service.js","sourceRoot":"","sources":["share-service.ts"],"names":[],"mappings":";;;;;;;AAAA,qBAA2B,eAAe,CAAC,CAAA;AAE3C,QAAO,uBAAuB,CAAC,CAAA;AAE/B;;;;;EAKE;AAEF;IAEE,sBAAmB,IAAU;QAAV,SAAI,GAAJ,IAAI,CAAM;QAC3B,OAAO,CAAC,GAAG,CAAC,6BAA6B,CAAC,CAAC;IAC7C,CAAC;IALH;QAAC,iBAAU,EAAE;oBAAA;IAOb,mBAAC;AAAD,CAAC,AAND,IAMC;AANY,oBAAY,eAMxB,CAAA"}

@@ -1,0 +1,64 @@
+<!--
+  Generated template for the ProductSettingsModify page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{product.name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-left (click)="submitIt($event)" round>
+        <ion-icon name="send"></ion-icon>
+        Update
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="product.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select [(ngModel)]="product.category">
+        <ion-option value="Powder Mix">Powder Mix</ion-option>
+        <ion-option value="Machine">Machine</ion-option>
+        <ion-option value="Clinic">Paper Cups</ion-option>
+        <ion-option value="Others">Others</ion-option>
+
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Price</ion-label>
+      <ion-input type="number" [(ngModel)]="product.price"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Unit Name</ion-label>
+      <ion-input type="text" [(ngModel)]="product.unit_name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-input type="text" [(ngModel)]="product.description"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <h2 *ngIf="photoRaw != ''">Product Photo</h2>
+      <img [src]="photo" *ngIf="photoRaw != ''" class="thePhoto" (click)="viewPhoto(photoRaw)" />
+      <button ion-button full icon-left (click)="capture()" color="light" large><ion-icon name="camera"></ion-icon><span *ngIf="photoRaw == ''">Set Product Photo</span><span *ngIf="photoRaw != ''">Change Photo</span></button>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

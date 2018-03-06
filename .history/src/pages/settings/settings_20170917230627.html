@@ -1,0 +1,144 @@
+<!--
+  Generated template for the Settings page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <div class="well well-sm">
+      <ion-list-header>
+        <h1>Important</h1>
+      </ion-list-header>
+      <ion-item>
+        <ion-label floating>Admin Pass Code</ion-label>
+        <ion-input [type]="passwordInput" [(ngModel)]="myPasscode" (blur)="updatePasscode()"></ion-input>
+      </ion-item>
+      <button ion-item [disabled]="depotList.length">
+        <ion-icon name="home" color="primary" item-left></ion-icon>
+        <h2>
+          <div>Depot</div>
+          <small>{{(depotList.length) ? "Select Depot" : "A Problem with Internet Connection"}}</small>
+        </h2>
+        <ion-note item-right>
+          {{(depot.name) ? depot.name : "N/A"}}
+        </ion-note>
+      </button>
+    </div>
+
+    <div class="well well-sm">
+      <ion-list-header>
+        <h1>Profile</h1>
+      </ion-list-header>
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img [src]="photoSanitized" (click)="capture()">
+        </ion-thumbnail>
+        <h2>{{profile.name}}</h2>
+        <p><ion-icon name="contact"></ion-icon> {{profile.contact}}</p>
+        <p><ion-icon name="star"></ion-icon> {{profile.id}}</p>
+        <button ion-button clear item-right (click)="updateProfile()">change</button>
+      </ion-item>
+    </div>
+
+    <div class="well well-sm">
+      <ion-list-header>
+        <h1>General</h1>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Minimum transaction radius <ion-badge item-right>{{gpsRadius}}</ion-badge></ion-label>
+        <ion-range min="10" max="100" step="2" [(ngModel)]="gpsRadius" (ionChange)="setGPSRadius()">
+          <ion-icon small range-left name="locate"></ion-icon>
+          <ion-icon range-right name="locate"></ion-icon>
+        </ion-range>
+      </ion-item>
+      <ion-item>
+        <ion-label>Max speed. meters per second <ion-badge item-right>{{maximumSpeed}}</ion-badge></ion-label>
+        <ion-range min="10" max="100" step="2" [(ngModel)]="maximumSpeed" (ionChange)="setMaximumSpeed()">
+          <ion-icon small range-left name="speedometer"></ion-icon>
+          <ion-icon range-right name="speedometer"></ion-icon>
+        </ion-range>
+      </ion-item>
+      <ion-item>
+        <ion-label>GPS Background Tracking</ion-label>
+        <ion-toggle [(ngModel)]="gpsBg" (ionChange)="setGPSBg()"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Off Take</ion-label>
+        <ion-toggle [disabled]="offTakeAccess" [(ngModel)]="offTake" (ionChange)="setOffTake()"></ion-toggle>
+      </ion-item>
+    </div>
+
+    <div class="well well-sm">
+      <ion-list-header>
+        <h1>Set up</h1>
+      </ion-list-header>
+      <button ion-item (click)="productSettings()">
+        Product Settings
+      </button>
+      <button ion-item (click)="adminContacts()">
+        Admin Contact Numbers
+      </button>
+      <button ion-item (click)="mobileCarriers()">
+        Mobile Carriers Prefix
+      </button>
+      <button ion-item (click)="import2C()">
+        Import clients to Contacts
+      </button>
+      <button ion-item (click)="calibrateBrgy()">
+        Calibrate Brgy
+      </button>
+      <button ion-item (click)="fix3point3()">
+        Fix for version 3.3
+      </button>
+    </div>
+
+    <div class="well well-sm">
+      <ion-list-header *ngIf="adminContactNumbers.length">
+        <h1>Reporting</h1>
+      </ion-list-header>
+      <ion-item *ngIf="adminContactNumbers.length">
+        <ion-label>General Reports Send to</ion-label>
+        <ion-select [(ngModel)]="generalReportContacts" multiple="true" (ionChange)="contactReportUpdate(1, generalReportContacts, 'general report')">
+          <ion-option *ngFor="let number of adminContactNumbers" [value]="number.contact">{{number.name}} - {{number.contact}} [{{myFunctions.getCarrier(number.contact)}}]</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="adminContactNumbers.length">
+        <ion-label>New Machine Report Send to</ion-label>
+        <ion-select [(ngModel)]="newMachineReportContact" multiple="true" (ionChange)="contactReportUpdate(2, newMachineReportContact, 'new machine report')">
+          <ion-option *ngFor="let number of adminContactNumbers" [value]="number.contact">{{number.name}} - {{number.contact}} [{{myFunctions.getCarrier(number.contact)}}]</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="adminContactNumbers.length">
+        <ion-label>Remit and Deposits Send to</ion-label>
+        <ion-select [(ngModel)]="remittanceAndDepositsReportContact" multiple="true" (ionChange)="contactReportUpdate(3, remittanceAndDepositsReportContact, 'remit and deposits report')">
+          <ion-option *ngFor="let number of adminContactNumbers" [value]="number.contact">{{number.name}} - {{number.contact}} [{{myFunctions.getCarrier(number.contact)}}]</ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div class="well well-sm">
+      <ion-list-header>
+        <h1>Database</h1>
+      </ion-list-header>
+      <button ion-item (click)="fullBackup()">
+        Full Database Back Up
+      </button>
+      <button ion-item (click)="softReset()" color="danger">
+        Soft Reset
+      </button>
+    </div>
+
+
+  </ion-list>
+</ion-content>

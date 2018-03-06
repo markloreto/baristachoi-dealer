@@ -1,0 +1,27 @@
+<!--
+  Generated template for the CartItemSelection page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Select Product</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item-group>
+    <div *ngFor="let key of keys;">
+      <ion-item-divider color="light">{{key}}</ion-item-divider>
+      <button ion-item *ngFor="let p of products[key]" (click)="selectProduct(p)">
+        <div>{{p.name}}</div>
+        <p>{{p.description}}</p>
+        <div item-right><span class="badge">{{p.inventory}}</span></div>
+      </button>
+    </div>
+  </ion-item-group>
+</ion-content>

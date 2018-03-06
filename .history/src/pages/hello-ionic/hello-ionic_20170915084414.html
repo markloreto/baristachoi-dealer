@@ -1,0 +1,71 @@
+
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="scan()">
+        <ion-icon name="qr-scanner"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button (click)="checkUpdateNew()">
+        Version-<span><strong>{{version}}</strong></span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list *ngIf="oldVList.length">
+    <ion-list-header>
+      Group List from old version of Barista Choi Depot
+    </ion-list-header>
+    <button ion-item *ngFor="let item of oldVList" (click)="oldVListLoad(item.id)">
+      <div>{{ item.name }} <span class="badge">{{item.items.length}} Clients/Machines</span></div>
+    </button>  
+  </ion-list>
+  <p *ngIf="progress != -1"><ngb-progressbar type="info" [value]="progress" [striped]="true" [animated]="true">{{progress.toFixed(2)}} %</ngb-progressbar></p>
+  <ion-list no-lines *ngIf="consoleList.length">
+    <div ion-item *ngFor="let item of consoleList">
+      <small [innerHTML]="item"></small>
+    </div> 
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      Summary
+    </ion-list-header>
+    <ion-item>
+      <ion-icon [name]="(thisWeekCommission >= lastWeekCommission) ? 'thumbs-up' : 'thumbs-down'" [color]="(thisWeekCommission >= lastWeekCommission) ? 'green' : 'danger'" item-left></ion-icon>
+      <h2>
+          <div>Week's Commission</div>
+          <small>{{(thisWeekCommission >= lastWeekCommission) ? "Congrats! You've exceeded your last week sales" : ((lastWeekCommission - thisWeekCommission) / 19) + " Kilos more" }}</small>
+      </h2>
+      <ion-note item-right>
+          ₱ {{thisWeekCommission}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon [name]="(thisMonthCommission >= lastMonthCommission) ? 'thumbs-up' : 'thumbs-down'" [color]="(thisMonthCommission >= lastMonthCommission) ? 'green' : 'danger'" item-left></ion-icon>
+      <h2>
+          <div>Month's Commission</div>
+          <small>{{(thisMonthCommission >= lastMonthCommission) ? "Congrats! You've exceeded your last month sales" : ((lastMonthCommission - lastWeekCommission) / 19) + " Kilos more" }}</small>
+      </h2>
+      <ion-note item-right>
+        ₱ {{thisMonthCommission}}
+      </ion-note>
+    </ion-item>
+    <ion-item *ngFor="let item of warningStock">
+      <ion-icon name="warning" color="yellow" item-left></ion-icon>
+      <h2>{{item.name}}</h2>
+      <ion-note item-right>
+        {{item.remaining}} {{myFunction.addS()}}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

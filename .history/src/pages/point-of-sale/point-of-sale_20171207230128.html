@@ -1,0 +1,69 @@
+<!--
+  Generated template for the PointOfSale page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Point of Sale</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="speak()" [disabled]="false">
+        <ion-icon name="megaphone"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar>
+    <div item-left>
+      <div class="c-avatar c-avatar u-xlarge fl" item-left style="width: 50px; height: 50px; margin: 8px 16px 8px 0;">
+        <img class="c-avatar__img" [src]="'assets/images/machines/' + selectedMachine.machine_type + '.png'"/>
+      </div>
+    </div>
+    <div item-left>
+      <h5 style="margin-bottom: .1em">{{selectedMachine.client_name}}</h5>
+      <p>{{ (selectedMachine.region == "") ? "Unknown" : selectedMachine.region + ", " + selectedMachine.municipal + ", " + selectedMachine.brgy }}</p>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="well well-lg text-center" *ngIf="items.length == 0">No Item in Cart</div>
+  <ion-list *ngIf="items.length > 0">
+    <ion-item-sliding *ngFor="let prod of items; let i = index">
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img [src]="prod.photo">
+        </ion-thumbnail>
+        <h2>{{prod.name}} <small>{{prod.description}}</small></h2>
+        <p><strong class="quantity">{{prod.qty}} x</strong> @ {{prod.price.toFixed(2)}}/{{prod.unit_name}}</p>
+        <div item-right>₱ {{prod.subTotal}}</div>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="removeItem(prod, i)">
+          <ion-icon name="trash"></ion-icon>
+          Remove
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons left >
+      <button ion-button small icon-left (click)="addItem()" round color="primary">
+        <ion-icon name="add-circle"></ion-icon>
+        Add Item
+      </button>
+    </ion-buttons>
+    <ion-buttons right >
+      <button ion-button small (click)="checkOutStart()" round [disabled]="!items.length">
+        Total <span class="badge" style="margin-left: 10px">₱ {{total}}</span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

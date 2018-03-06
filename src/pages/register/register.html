@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="login-content" padding>
+  <div class="login-box">
+
+
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            <ion-item>
+              <div class="container-fluid">
+                <img class="img-responsive img-thumbnail center-block" [src]="(photo == '') ? 'assets/images/no-profile-img.gif' : photo" (click)="viewPhoto(photoRaw)" style="width: 20vh;height: 20vh">
+                <div class="row">
+                  <div class="col text-center">
+                    <button ion-button round icon-left (click)="capture()" type="button" color="light"><ion-icon name="camera"></ion-icon><span *ngIf="photo == ''">Take a Photo</span><span *ngIf="photo != ''">Change Photo</span></button>
+                  </div>
+                </div>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" [(ngModel)]="name" placeholder="Name"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="number" [(ngModel)]="contact" placeholder="Contact #"></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="button" (click)="register()">Register</button>
+        </ion-col>
+      </ion-row>
+
+
+  </div>
+</ion-content>

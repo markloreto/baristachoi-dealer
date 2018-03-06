@@ -1,0 +1,84 @@
+<!--
+  Generated template for the Receipt page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Receipt {{orderId}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="well well-sm">
+    <ion-list>
+      <ion-item>
+        <ion-thumbnail item-left *ngIf="client.photo">
+          <img [src]="client.photo">
+        </ion-thumbnail>
+        <h2>{{client.name}}</h2>
+        <h3>{{orderDate}}</h3>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <table class="table table-striped table-condensed table-responsive">
+    <thead>
+      <tr>
+        <th>Quantity</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Sub-Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{item.minus}} {{myFunctions.addS(item.unit_name, item.minus)}}</td>
+        <td>{{item.name}}</td>
+        <td>₱ {{item.price}}</td>
+        <td>₱ {{(item.price * item.minus)}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" style="font-weight: bold; text-align: right">IN CART TOTAL:</td>
+        <td>₱ {{grandTotal}}</td>
+      </tr>
+      <tr>
+        <td colspan="4" class="text-center info">PAYMENTS</td>
+      </tr>
+      <tr *ngFor="let pay of payments">
+        <td colspan="3">
+          {{pay.dateTime}}
+        </td>
+        <td>₱ {{pay.amount}}</td>
+      </tr>
+      <tr>
+        <td colspan="2"></td>
+        <td style="font-weight: bold; text-align: right">TOTAL PAYMENTS:</td>
+        <td>₱ {{totalPayments}}</td>
+      </tr>
+      <tr *ngIf="change != 0">
+        <td colspan="2"></td>
+        <td style="font-weight: bold; text-align: right">CHANGE:</td>
+        <td>₱ {{change}}</td>
+      </tr>
+    </tfoot>
+  </table>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons end>
+      <button ion-button icon-right color="royal" (click)="sendReceipt()">
+        Send Receipt
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

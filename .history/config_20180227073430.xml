@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.ionicframework.baristachoisas690516" version="5.6" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Barista Choi</name>
+    <description>An awesome Callsheet App</description>
+    <author email="markyctrigger27@gmail.com" href="https://www.facebook.com/markyctrigger27">Mark Loreto</author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <preference name="AndroidLaunchMode" value="singleTask" />
+        <allow-intent href="market:*" />
+        <icon density="ldpi" src="resources\android\icon\drawable-ldpi-icon.png" />
+        <icon density="mdpi" src="resources\android\icon\drawable-mdpi-icon.png" />
+        <icon density="hdpi" src="resources\android\icon\drawable-hdpi-icon.png" />
+        <icon density="xhdpi" src="resources\android\icon\drawable-xhdpi-icon.png" />
+        <icon density="xxhdpi" src="resources\android\icon\drawable-xxhdpi-icon.png" />
+        <icon density="xxxhdpi" src="resources\android\icon\drawable-xxxhdpi-icon.png" />
+        <splash density="land-ldpi" src="resources\android\splash\drawable-land-ldpi-screen.png" />
+        <splash density="land-mdpi" src="resources\android\splash\drawable-land-mdpi-screen.png" />
+        <splash density="land-hdpi" src="resources\android\splash\drawable-land-hdpi-screen.png" />
+        <splash density="land-xhdpi" src="resources\android\splash\drawable-land-xhdpi-screen.png" />
+        <splash density="land-xxhdpi" src="resources\android\splash\drawable-land-xxhdpi-screen.png" />
+        <splash density="land-xxxhdpi" src="resources\android\splash\drawable-land-xxxhdpi-screen.png" />
+        <splash density="port-ldpi" src="resources\android\splash\drawable-port-ldpi-screen.png" />
+        <splash density="port-mdpi" src="resources\android\splash\drawable-port-mdpi-screen.png" />
+        <splash density="port-hdpi" src="resources\android\splash\drawable-port-hdpi-screen.png" />
+        <splash density="port-xhdpi" src="resources\android\splash\drawable-port-xhdpi-screen.png" />
+        <splash density="port-xxhdpi" src="resources\android\splash\drawable-port-xxhdpi-screen.png" />
+        <splash density="port-xxxhdpi" src="resources\android\splash\drawable-port-xxxhdpi-screen.png" />
+        <config-file parent="./application/activity" target="AndroidManifest.xml">
+            <intent-filter android:label="@string/launcher_name">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter android:label="Barista Choi File">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="file" />
+                <data android:mimeType="application/json" />
+                <data android:pathPattern=".*\\.baristachoi" />
+            </intent-filter>
+        </config-file>
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="SplashScreenDelay" value="10" />
+    <preference name="FadeSplashScreenDuration" value="6000" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="loadUrlTimeoutValue" value="700000" />
+    <feature name="StatusBar">
+        <param name="ios-package" onload="true" value="CDVStatusBar" />
+    </feature>
+    <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
+    <plugin name="cordova-plugin-whitelist" spec="1.3.1" />
+    <plugin name="cordova-plugin-console" spec="1.0.5" />
+    <plugin name="cordova-plugin-statusbar" spec="2.2.1" />
+    <plugin name="cordova-plugin-device" spec="1.1.4" />
+    <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
+    <plugin name="cordova-plugin-network-information" spec="1.3.1" />
+    <plugin name="cordova-plugin-autostart" spec="2.0.1" />
+    <plugin name="cordova-plugin-background-mode" spec="0.6.5" />
+    <plugin name="cordova.plugins.diagnostic" source="npm" />
+    <plugin name="cordova-plugin-appminimize" spec="1.0" />
+    <plugin name="cordova-sqlite-storage" spec="2.0" />
+    <plugin name="com.phonegap.plugins.nativesettingsopener" spec="1.2" />
+    <plugin name="cordova-plugin-camera" spec="2.3.1" />
+    <plugin name="cordova-plugin-contacts" spec="2.2.1" />
+    <plugin name="cordova-plugin-actionsheet" spec="2.3.3" />
+    <plugin name="com-sarriaroman-photoviewer" spec="1.1.10" />
+    <plugin name="cordova-plugin-app-update" spec="~1.3.9" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="~6.0.8" />
+    <icon src="resources\android\icon\drawable-xhdpi-icon.png" />
+    <allow-navigation href="http://192.168.254.104:8000" />
+    <allow-navigation href="http://192.168.254.100:8000" />
+    <allow-navigation href="http://192.168.254.105:8000" />
+    <allow-navigation href="http://192.168.254.104:8100" />
+    <allow-navigation href="http://192.168.254.100:8100" />
+    <allow-navigation href="http://192.168.254.103:8100" />
+    <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
+    <plugin name="cordova-plugin-mauron85-background-geolocation" spec="~2.2.5">
+        <variable name="ACCOUNT_TYPE" value="$PACKAGE_NAME.account" />
+        <variable name="CONTENT_AUTHORITY" value="$PACKAGE_NAME" />
+    </plugin>
+    <plugin name="cordova-plugin-filechooser" spec="~1.0.1" />
+    <plugin name="cordova-plugin-filepath" spec="~1.0.2" />
+    <plugin name="cordova-wheel-selector-plugin" spec="~1.0.0" />
+    <plugin name="cordova-plugin-nativestorage" spec="~2.2.2" />
+    <plugin name="cordova-plugin-tts" spec="~0.2.3" />
+    <allow-navigation href="http://192.168.254.101:8100" />
+    <plugin name="cordova-plugin-nativeaudio" spec="~3.0.9" />
+    <plugin name="cordova-plugin-googlemaps" spec="^2.1.1">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBTwEZjrc21k5aj6Nn67aDYRv3JAF0I3kE" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyBlOXsfHGBOwzQyoVs-fkrjo9LC8K3GeI0" />
+    </plugin>
+    <plugin name="cordova-plugin-compat" spec="^1.2.0" />
+    <engine name="android" spec="~6.2.3" />
+</widget>

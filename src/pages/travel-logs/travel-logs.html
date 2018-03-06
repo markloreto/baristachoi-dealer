@@ -1,0 +1,21 @@
+<!--
+  Generated template for the TravelLogs page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Travel Log</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="map-wrapper">
+    <google-map [markers]="markers" [toolbar]="true" *ngIf="markers.length"></google-map>
+  </div>
+</ion-content>

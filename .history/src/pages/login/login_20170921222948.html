@@ -1,0 +1,39 @@
+<ion-content class="login-content" padding *ngIf="!slide">
+  <ion-row class="logo-row">
+    <ion-col></ion-col>
+    <ion-col width-67>
+      <img src="assets/logo.png"/>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <div class="login-box" *ngIf="users.length">
+
+      <ion-row>
+        <ion-col>
+          <ion-list radio-group [(ngModel)]="selectedUser">
+
+            <ion-item *ngFor="let user of users">
+              <ion-label>{{ user.name }}</ion-label>
+              <ion-radio value="{{ user.id }}"></ion-radio>
+            </ion-item>
+          </ion-list>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="button" (click)="switchNow()">Switch User</button>
+          <button ion-button class="register-btn" block clear (click)="createAccount()">Create New Account</button>
+          <button ion-button class="register-btn" block clear (click)="restoreBackup()">Restore Database</button>
+          <button ion-button class="register-btn" block clear (click)="cloudImport()">Cloud Import</button>
+        </ion-col>
+      </ion-row>
+
+
+  </div>
+</ion-content>
+
+<ion-content *ngIf="slide" padding>
+  <slide></slide>
+</ion-content>

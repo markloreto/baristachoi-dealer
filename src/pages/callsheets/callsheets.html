@@ -1,0 +1,67 @@
+<!--
+  Generated template for the Callsheets page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Callsheets</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-buttons start >
+      <button ion-button small icon-left (click)="pMonth()" round>
+        <ion-icon name="arrow-back"></ion-icon>
+        {{ previousMonth }}
+      </button>
+    </ion-buttons>
+    <ion-title><small>{{ headerMonth }}</small></ion-title>
+    <ion-buttons end>
+      <button small ion-button (click)="nMonth()" round icon-right [disabled]="!hideNext">
+        {{ nextMonth }}
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="well well-lg text-center" *ngIf="calls.length == 0">No Data</div>
+  <ion-list *ngIf="!loading">
+    <div *ngFor="let call of calls" class="well well-sm">
+      <button ion-item (click)="csItem(call.cs_item[0], call.cs_item[1], call.cs_item[2])">
+        <h2>{{ call.date }}</h2>
+      </button>
+      <ul class="list-group" style="margin-top: 5px">
+        <li class="list-group-item" [ngClass]="{'list-group-item-danger': (today != call.date && call.visited != call.total_units), 'list-group-item-success': (call.visited == call.total_units && (call.visited != 0 && call.total_units != 0))}">
+          <span class="badge">{{ call.visited }} / {{ call.total_units }}</span>
+          Visits
+        </li>
+        <li class="list-group-item list-group-item-danger" *ngIf="call.missed_calls && (call.date != today)">
+          <span class="badge">{{ call.missed_calls }}</span>
+          Missed Calls
+        </li>
+        <li class="list-group-item" *ngIf="call.total_special_visit">
+          <span class="badge">{{ call.total_special_visit }}</span>
+          Special Visits
+        </li>
+        <li class="list-group-item list-group-item-danger" *ngIf="call.total_invalid_visit">
+          <span class="badge">{{ call.total_invalid_visit }}</span>
+          Inaccurate Visits
+        </li>
+        <li class="list-group-item" *ngIf="call.total_new">
+          <span class="badge">{{ call.total_new }}</span>
+          Newly added units
+        </li>
+        <li class="list-group-item list-group-item-danger" *ngIf="call.total_gps_problem">
+          <span class="badge">{{ call.total_gps_problem }}</span>
+          GPS Problems
+        </li>
+      </ul>
+    </div>
+  </ion-list>
+</ion-content>

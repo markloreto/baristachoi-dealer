@@ -1,0 +1,93 @@
+<!--
+  Generated template for the CallsheetDay page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ title }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-buttons>
+      <button ion-button icon-left clear [color]="accColor">
+        <ion-icon name="locate"></ion-icon>
+        <span *ngIf="accuracy == 'Positioning...'">{{ accuracy }}</span><span *ngIf="accuracy != 'Positioning...'">{{ accuracy }} meters </span> <span *ngIf="(gpsTimer < 60 && gpsTimer > 0) && !pos">{{ gpsTimer }}</span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list [sliding]="swipeOption" [ngClass]="{'hide': (tab == 'map'), 'show': (tab == 'machines') }" [virtualScroll]="machines" approxItemHeight="60px">
+    <ion-item-sliding #slidingItem *virtualItem="let machine; let i = index" [ngClass]="{'sortNow': machine.drag, 'sortStop': !machine.drag }">
+        <ion-item [ngClass]="{'greenyellow': (machine.last_visit == today), 'def': (machine.last_visit != today) }">
+          <div class="c-avatar c-avatar u-xlarge" item-left style="width: 80px; height: 80px; margin: 8px 16px 8px 0;" (click)="viewPhoto(machine)">
+            <ion-img class="c-avatar__img" [src]="machine.avatar"></ion-img>
+            <ion-img class="c-avatar__img" [src]="'assets/images/machines/' + machine.machine_type + '.png'"></ion-img>
+          </div>
+          <h2>{{ (machine.region == "") ? "Unknown" : machine.region + ", " + machine.municipal + ", " + machine.brgy }}</h2>
+          <h3 *ngIf="machine.owner_id">{{ machine.client_name }}</h3>
+          <div>
+            <span class="c-badge c-badge--{{ machine.client_status_icon[0] }}"><ion-icon [name]="machine.client_status_icon[1]"></ion-icon></span>
+            <span class="c-badge c-badge--{{ machine.last_visit_info[0] }}">{{ machine.last_visit_info[1] }}</span>
+            <span class="c-badge c-badge--{{ getTColor(machine) }}" *ngIf="pos" (click)="mapRange(machine.lat, machine.lng, (machine.region == '') ? 'Unknown' : machine.region + ', ' + machine.municipal + ', ' + machine.brgy, machine.client_name)">{{ machine.distance }} {{ machine.distanceName }}</span>
+            <span class="c-badge c-badge--info" *ngIf="!pos"><ion-icon small name="locate"></ion-icon></span>
+          </div>
+          <ion-checkbox [(ngModel)]="machine.chk" item-right *ngIf="selection" (ionChange)="chkb(machine)"></ion-checkbox>
+        </ion-item>
+
+      <ion-item-options side="left">
+        <button ion-button color="primary" *ngIf="machine.client_contact" (click)="smsIt(machine)">
+          <ion-icon name="text"></ion-icon>
+          Text
+        </button>
+        <button ion-button color="secondary" (click)="callIt(machine)" *ngIf="machine.client_contact">
+          <ion-icon name="call"></ion-icon>
+          Call
+        </button>
+      </ion-item-options>
+      <ion-item-options side="right">
+        <button ion-button color="secondary" (click)="updateMachine(machine, slidingItem)">
+          <ion-icon name="create"></ion-icon>
+          Update
+        </button>
+        <button ion-button color="primary" (click)="activity(machine, slidingItem)">
+          <ion-icon name="more"></ion-icon>
+          Action
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <div [ngClass]="{'hide': (tab == 'machines'), 'show': (tab == 'map') }">
+    <div class="map-wrapper">
+      <google-map [markers]="markers" [poly]="poly" [toolbar]="false" *ngIf="markers.length && mapEnabled"></google-map>
+    </div>
+  </div>
+  <ion-fab bottom right [ngClass]="{'show': (tab == 'machines'), 'hide': (tab == 'map') }">
+    <button ion-fab [color]="accColor" (click)="addMachine($event)"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="tab" color="primary" (ionChange)="chkSegment()">
+      <ion-segment-button value="machines">
+        <ion-icon name="list-box"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="map">
+        <ion-icon name="map"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

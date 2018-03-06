@@ -1,0 +1,28 @@
+<!--
+  Generated template for the UnsentMessages page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Unsent SMS</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="well well-lg text-center" *ngIf="myDatabase.unsents == 0">No Unsent Messages</div>
+  <ion-list>
+    <ion-item *ngFor="let unsent of myDatabase.unsents">
+      <h2>{{unsent.date}}</h2>
+      <h3>{{unsent.numbers}}</h3>
+      <p>{{unsent.msg}}</p>
+      <button ion-button clear item-right (click)="sendIt(unsent)" [disabled]="unsent.disabled">{{(unsent.disabled) ? "Sending..." : "Send"}}</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

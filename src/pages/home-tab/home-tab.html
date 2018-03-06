@@ -1,0 +1,4 @@
+<ion-tabs tabsPlacement="bottom">
+  <ion-tab [root]="page1" tabTitle="Summary" tabIcon="home"></ion-tab>
+  <ion-tab [root]="page2" tabTitle="Unsent SMS" tabIcon="mail" [tabBadge]="myDatabase.unsents.length" tabBadgeStyle="danger"></ion-tab>
+</ion-tabs>

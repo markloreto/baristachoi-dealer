@@ -1,0 +1,90 @@
+<!--
+  Generated template for the AddClient page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Add Client</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="selectContact()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="addClientForm" (ngSubmit)="logForm()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <div *ngIf="!theName.valid && theName.touched" class="error-box">*Name is empty</div>
+      <div *ngIf="theName.hasError('required') && theName.touched" class="error-box">*Name is required</div>
+
+      <ion-item>
+        <ion-label>Alias</ion-label>
+        <ion-input type="text" formControlName="alias"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Company</ion-label>
+        <ion-input type="text" formControlName="company"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Primary Contact #</ion-label>
+        <ion-input type="number" formControlName="contact" (input)="contactSearch($event)"></ion-input>
+      </ion-item>
+      <div *ngIf="(theContact.hasError('minlength') || theContact.hasError('maxlength')) && theContact.touched" class="error-box">*Pls format it to: <em>09321234567</em></div>
+      <ion-item *ngIf="contactsfound.length">
+        <ion-list radio-group [(ngModel)]="contactId" [ngModelOptions]="{standalone: true}" item-content>
+          <ion-list-header>
+            Import from Contacts
+          </ion-list-header>
+
+          <ion-item *ngFor="let contact of contactsfound">
+            <h2>{{ contact.displayName }}</h2>
+            <p *ngFor="let pNumbers of contact.phoneNumbers"><strong>{{ pNumbers.type }}</strong>  {{ pNumbers.value }} </p>
+            <button ion-button item-right type="button" color="light" (click)="selectedContact(contact)">Import</button>
+          </ion-item>
+
+        </ion-list>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Other Contact #</ion-label>
+        <ion-input type="number" formControlName="contact2"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="pin" item-left></ion-icon>
+        {{ address }}
+        <button ion-button clear item-right (click)="updateMarker()" type="button">update</button>
+      </ion-item>
+
+      <ion-item>
+        <h2 *ngIf="photo != ''">Photo</h2>
+        <img [src]="photo" *ngIf="photo != ''" class="thePhoto" (click)="viewPhoto(rawPhoto)"/>
+        <button ion-button full icon-left (click)="capture()" large type="button" color="light"><ion-icon name="camera"></ion-icon><span *ngIf="photo == ''">Take a Photo</span><span *ngIf="photo != ''">Change Photo</span></button>
+      </ion-item>
+
+    </ion-list>
+    <div padding>
+      <button ion-button full icon-left large [disabled]="!addClientForm.valid" type="submit"><ion-icon [name]='(client) ? "send" : "person-add"'></ion-icon><span >{{(client) ? "Update" : "Submit"}}</span></button>
+    </div>
+  </form>
+
+</ion-content>

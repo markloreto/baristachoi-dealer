@@ -1,0 +1,109 @@
+<!--
+  Generated template for the CallsheetItems page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Callsheet</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-left (click)="reportIt($event)" round>
+        <ion-icon name="send"></ion-icon>
+        Report
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-title><small>{{ title }}</small></ion-title>
+    <ion-buttons right>
+      <button ion-button icon-left round icon-right (click)="visitedList()">
+        {{visited_ids.length}} / {{total_machines}}
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="well well-lg text-center" *ngIf="calls.length == 0">No Data</div>
+  <ion-list>
+    <div *ngFor="let call of calls" class="well well-sm">
+      <ion-item-sliding>
+        <ion-item>
+          <ion-icon [name]="call.icon" item-left></ion-icon>
+          <h2>{{call.type}}</h2>
+          <p>{{(call.type == "Sale") ? "₱ " + call.note + " Total Sales" : call.note}}</p>
+          <ion-note item-right>
+            {{call.time}}
+          </ion-note>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="remove(call)">
+            <ion-icon name="trash"></ion-icon>
+            Remove
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+      <table class="table" style="margin-top: 5px">
+        <tr *ngIf="call.client_name">
+          <td class="name">Client name</td>
+          <td class="value">{{call.client_name}}</td>
+        </tr>
+        <tr (click)="mapDistance(call)" *ngIf="call.distance != null">
+          <td class="name">Distance</td>
+          <td class="value"><a href="#" [ngClass]="{redText: (call.distance > myFunctions.gpsMinimumMeter), greenText: (call.distance <= myFunctions.gpsMinimumMeter)}">{{(call.distance > myFunctions.gpsMinimumMeter) ? "Inaccurate" : "Accurate"}} <span class="badge">{{call.distance}} m</span></a></td>
+        </tr>
+        <tr>
+          <td class="name">Location</td>
+          <td class="value">{{(call.machine_region) ? call.machine_region + ", " + call.machine_municipal + ", " + call.machine_brgy : "Unknown"}}</td>
+        </tr>
+        <tr class="danger" *ngIf="call.distance == null">
+          <td class="active text-center" colspan="2">GPS Problem</td>
+        </tr>
+        <tr class="warning" *ngIf="ddd != call.delivery">
+          <td class="active text-center" colspan="2">Special Visit - {{myFunctions.convertDay(call.delivery)}}</td>
+        </tr>
+        <tr class="info" *ngIf="call.isNew">
+          <td class="active text-center" colspan="2">New Client</td>
+        </tr>
+        <tr class="info" *ngIf="call.order_id">
+          <td class="active text-center" colspan="2"><a href="#" (click)="orderPage(call)">Order # {{call.order_id}}</a></td>
+        </tr>
+      </table>
+    </div>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-left round icon-right (click)="openStats()" *ngIf="(calls.length && visited_ids.length)">
+        <ion-icon name="stats"></ion-icon>
+        Stats
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-left round icon-right (click)="openSales()" [disabled]="!sales.length">
+        <ion-icon name="trending-up"></ion-icon>
+        Sales
+      </button>
+    </ion-buttons>
+    <ion-buttons>
+      <button ion-button round icon-right (click)="newMachines()" *ngIf="total_new">
+        <span style="margin-right: 5px" item-left="">New units</span>
+        <ion-badge item-right>{{total_new}}</ion-badge>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button round icon-right (click)="missedCalls()" *ngIf="missed_ids.length">
+        <span style="margin-right: 5px" item-left *ngIf="today == title">Unvisited</span>
+        <span style="margin-right: 5px" item-left *ngIf="today != title">Missed</span>
+        <ion-badge item-right color="danger">{{missed_ids.length}}</ion-badge>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

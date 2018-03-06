@@ -1,0 +1,40 @@
+<!--
+  Generated template for the ActionModal page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start class="bar-buttons bar-buttons-md">
+      <button (click)="dismiss()" ion-button class="disable-hover bar-button bar-button-md bar-button-default bar-button-default-md"><span class="button-inner">Close</span><div class="button-effect" style="transform: translate3d(-30px, -29px, 0px) scale(1); height: 86px; width: 86px; opacity: 0; transition: transform 280ms, opacity 196ms 84ms;"></div></button>
+    </ion-buttons>
+    <ion-title>{{action}} note selection</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of items">
+      <ion-item>
+        {{item.name}}
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="removeItem(item)">
+          <ion-icon name="md-trash"></ion-icon>
+          Remove
+        </button>
+        <button ion-button color="primary" (click)="submitIt(item.name, item.id)">
+          <ion-icon name="thumbs-up"></ion-icon>
+          Select
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab bottom right>
+    <button ion-fab (click)="addAction($event)"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

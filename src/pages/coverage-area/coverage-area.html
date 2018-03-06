@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Coverage Area</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-buttons>
+      <button ion-button icon-left clear [color]="accColor">
+        <ion-icon name="locate"></ion-icon>
+        <span *ngIf="accuracy == 'Positioning...'">{{ accuracy }}</span><span *ngIf="accuracy != 'Positioning...'">{{ accuracy }} meters</span>
+      </button>
+    </ion-buttons>
+    <ion-buttons right *ngIf="myDatabase.machineBackups.length">
+      <button ion-button icon-right (click)="buConfirm()">
+        <span>Back Ups</span>
+        <span class="badge" style="margin-left: 5px">{{myDatabase.machineBackups.length}}</span>
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      Your Area
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let area of areas">
+      <button ion-item detail-push class="btn" *ngIf="myLoc != area.region + ', ' + area.municipal + ', ' + area.brgy" (click)="cs([area.region, area.municipal, area.brgy])">
+        <div>{{ (area.region) ? area.region + ', ' + area.municipal + ', ' + area.brgy : "Unknown" }} <span class="badge">{{ area.numbers }}</span></div>
+      </button>
+      <button ion-item detail-push class="btn" *ngIf="myLoc == area.region + ', ' + area.municipal + ', ' + area.brgy" class="btn btn-primary" (click)="cs([area.region, area.municipal, area.brgy])">
+        <div>{{ (area.region) ? area.region + ', ' + area.municipal + ', ' + area.brgy : "Unknown" }} <span class="badge">{{ area.numbers }}</span></div>
+      </button>
+      <ion-item-options side="left">
+        <button ion-button color="primary" (click)="unset(area)">
+          <ion-icon name="checkbox"></ion-icon>
+          Unset Area
+        </button>
+        <button ion-button color="secondary" (click)="backup(area)">
+          <ion-icon name="checkbox"></ion-icon>
+          back-up
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <ion-list-header>
+      Not your Area
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let area of notYourAreas">
+      <button ion-item detail-push class="btn" *ngIf="myLoc != area.region + ', ' + area.municipal + ', ' + area.brgy" (click)="cs([area.region, area.municipal, area.brgy])">
+        <div>{{ (area.region) ? area.region + ', ' + area.municipal + ', ' + area.brgy : "Unknown" }} <span class="badge">{{ area.numbers }}</span></div>
+      </button>
+      <button ion-item detail-push class="btn" *ngIf="myLoc == area.region + ', ' + area.municipal + ', ' + area.brgy" class="btn btn-primary" (click)="cs([area.region, area.municipal, area.brgy])">
+        <div>{{ (area.region) ? area.region + ', ' + area.municipal + ', ' + area.brgy : "Unknown" }} <span class="badge">{{ area.numbers }}</span></div>
+      </button>
+      <ion-item-options side="left">
+        <button ion-button color="primary" (click)="set(area)">
+          <ion-icon name="checkbox-outline"></ion-icon>
+          Set as your Area
+        </button>
+        <button ion-button color="secondary" (click)="backup(area)">
+          <ion-icon name="checkbox"></ion-icon>
+          back-up
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ul class="list-group" style="margin-top: 5px">
+    <li class="list-group-item">
+      <span class="badge">{{ areasNum }}</span>
+      Your Area
+    </li>
+    <li class="list-group-item">
+      <span class="badge">{{ notYourAreaNum }}</span>
+      Not your Area
+    </li>
+  </ul>
+</ion-content>

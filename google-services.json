@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "233348829004",
+    "firebase_url": "https://barista-choi-sas.firebaseio.com",
+    "project_id": "barista-choi-sas",
+    "storage_bucket": "barista-choi-sas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233348829004:android:cc849f2c64cb5a16",
+        "android_client_info": {
+          "package_name": "com.ionicframework.baristachoisas690516"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "233348829004-sq1lh3tra7op9vf6gkqkiinvoajml8p6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxpheReNXhg11xs-fwuGKExFDdcvACdww"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

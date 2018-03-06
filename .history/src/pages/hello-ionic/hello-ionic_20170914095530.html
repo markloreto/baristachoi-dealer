@@ -1,0 +1,58 @@
+
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="scan()">
+        <ion-icon name="qr-scanner"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button (click)="checkUpdateNew()">
+        Version-<span><strong>{{version}}</strong></span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list *ngIf="oldVList.length">
+    <ion-list-header>
+      Group List from old version of Barista Choi Depot
+    </ion-list-header>
+    <button ion-item *ngFor="let item of oldVList" (click)="oldVListLoad(item.id)">
+      <div>{{ item.name }} <span class="badge">{{item.items.length}} Clients/Machines</span></div>
+    </button>  
+  </ion-list>
+  <p *ngIf="progress != -1"><ngb-progressbar type="info" [value]="progress" [striped]="true" [animated]="true">{{progress.toFixed(2)}} %</ngb-progressbar></p>
+  <ion-list no-lines *ngIf="consoleList.length">
+    <div ion-item *ngFor="let item of consoleList">
+      <small [innerHTML]="item"></small>
+    </div> 
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      Summary
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="checkbox-outline" item-start></ion-icon>
+      This Week Commision
+      <ion-note item-end>
+          ₱ {{thisWeekCommission}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="checkbox-outline" item-start></ion-icon>
+      This Month Commision
+      <ion-note item-end>
+        ₱ {{thisMonthCommission}}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
